@@ -85,30 +85,28 @@ class VigenereCipheringMachine {
 
 function createMatrix(lang) {
   let matrix = [];
+  let numAlphabet;
+  let firstLet;
+  let lastLet;
   if (lang == "english") {
-    for (j = 0; j < 26; j++) {
-      matrix[j] = [];
-      for (i = 0; i < 26; i++) {
-        let arrPos = i + 65 + j;
-        if (arrPos > 90) {
-          arrPos = i + 65 + j - 26;
-        }
-        matrix[j].push(String.fromCharCode(arrPos));
-      }
-    }
+    numAlphabet = 26;
+    firstLet = 65;
+    lastLet = 90;
   } else if (lang == "russian") {
-    for (j = 0; j < 34; j++) {
-      matrix[j] = [];
-      for (i = 0; i < 34; i++) {
-        let arrPos = i + 1072 + j;
-        if (arrPos > 1105) {
-          arrPos = i + 1072 + j - 34;
-        }
-        matrix[j].push(String.fromCharCode(arrPos));
+    numAlphabet = 34;
+    firstLet = 1072;
+    lastLet = 1105;
+  }
+  for (j = 0; j < numAlphabet; j++) {
+    matrix[j] = [];
+    for (i = 0; i < numAlphabet; i++) {
+      let arrPos = i + firstLet + j;
+      if (arrPos > lastLet) {
+        arrPos = i + firstLet + j - numAlphabet;
       }
+      matrix[j].push(String.fromCharCode(arrPos));
     }
   }
-
   return matrix;
 }
 
